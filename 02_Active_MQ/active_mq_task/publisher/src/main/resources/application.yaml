@@ -1,0 +1,11 @@
+app:
+  topic: ${TOPIC:test_topic}
+server:
+  port: 8081
+spring:
+  application:
+    name: publisher
+  activemq:
+    broker-url: ${ACTIVE_MQ_URL:tcp://localhost:61616}
+    packges:
+      trusted: org.springframework.remoting.support,java.lang,com.epam
