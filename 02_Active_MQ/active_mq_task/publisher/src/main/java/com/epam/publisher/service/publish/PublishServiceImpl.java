@@ -1,14 +1,15 @@
-package com.epam.resource_service.service.publish;
+package com.epam.publisher.service.publish;
 
-import com.epam.resource_service.model.Message;
+import com.epam.publisher.model.Message;
 import lombok.RequiredArgsConstructor;
-import org.apache.activemq.command.ActiveMQTopic;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PublishServiceImpl implements PublishService {
 
     @Value("${app.topic}")
@@ -18,7 +19,8 @@ public class PublishServiceImpl implements PublishService {
 
     @Override
     public Message publishMessage(Message message) {
-        jmsTemplate.convertAndSend(new ActiveMQTopic(topic), message);
+        jmsTemplate.convertAndSend(topic, message);
+        log.info("Message sent: {}", message);
         return message;
     }
 }

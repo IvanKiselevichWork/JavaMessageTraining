@@ -2,7 +2,7 @@ app:
   topic: ${TOPIC:test_topic}
   queue: ${QUEUE:test_queue}
 server:
-  port: 8081
+  port: 8082
 spring:
   application:
     name: publisher

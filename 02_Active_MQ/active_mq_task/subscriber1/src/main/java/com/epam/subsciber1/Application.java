@@ -1,4 +1,4 @@
-package com.epam.resource_service;
+package com.epam.subsciber1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
