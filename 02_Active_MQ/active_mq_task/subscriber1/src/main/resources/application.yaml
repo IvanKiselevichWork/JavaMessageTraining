@@ -5,7 +5,7 @@ server:
   port: 8082
 spring:
   application:
-    name: publisher
+    name: subscriber1
   activemq:
     broker-url: ${ACTIVE_MQ_URL:tcp://localhost:61616}
     packages:
