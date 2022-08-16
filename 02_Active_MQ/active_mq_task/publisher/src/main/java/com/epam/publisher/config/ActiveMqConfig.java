@@ -2,14 +2,12 @@ package com.epam.publisher.config;
 
 import com.epam.publisher.model.Message;
 import com.epam.publisher.model.Reply;
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
@@ -28,9 +26,6 @@ public class ActiveMqConfig {
 
     @Value("${app.queue}")
     private String queue;
-
-    @Value("${spring.activemq.broker-url}")
-    private String url;
 
     @Bean
     public Topic topic() {
@@ -55,18 +50,5 @@ public class ActiveMqConfig {
         converter.setTypeIdPropertyName("JMS_TYPE");
 
         return converter;
-    }
-
-    @Bean
-    public ActiveMQConnectionFactory connectionFactory() {
-        return new ActiveMQConnectionFactory("admin", "admin", url);
-    }
-
-    @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory());
-        factory.setMessageConverter(jacksonJmsMessageConverter());
-        return factory;
     }
 }

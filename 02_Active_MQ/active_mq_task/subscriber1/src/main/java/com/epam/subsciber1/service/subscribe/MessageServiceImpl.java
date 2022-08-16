@@ -26,5 +26,6 @@ public class MessageServiceImpl {
         log.info("Get message: {}", message);
         Reply reply = new Reply(SUBSCRIBER, message);
         jmsTemplate.convertAndSend(queue, reply);
+        log.info("Sent reply: {}", reply);
     }
 }
