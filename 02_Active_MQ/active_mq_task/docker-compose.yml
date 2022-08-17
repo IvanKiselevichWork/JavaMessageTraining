@@ -2,6 +2,29 @@ version: "3.9"
 services:
   activemq:
     image: webcenter/activemq:latest
+  publisher:
+    build:
+      context: ./publisher/.
+      dockerfile: ./Dockerfile
+    environment:
+      ACTIVE_MQ_URL: tcp://activemq:61616
+    depends_on:
+      - activemq
     ports:
-      - 8161:8161
-      - 61616:61616
+      - "8081:8081"
+  subscriber1:
+    build:
+      context: ./subscriber1/.
+      dockerfile: ./Dockerfile
+    environment:
+      ACTIVE_MQ_URL: tcp://activemq:61616
+    depends_on:
+      - activemq
+  subscriber2:
+    build:
+      context: ./subscriber2/.
+      dockerfile: ./Dockerfile
+    environment:
+      ACTIVE_MQ_URL: tcp://activemq:61616
+    depends_on:
+      - activemq
