@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
+import org.springframework.jms.connection.SingleConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
@@ -36,10 +37,12 @@ public class ActiveMqConfig {
     }
 
     @Bean
-    public JmsListenerContainerFactory<?> topicListenerFactory(ConnectionFactory connectionFactory) {
+    public JmsListenerContainerFactory<?> topicListenerFactory(SingleConnectionFactory connectionFactory) {
+        connectionFactory.setClientId("subsciber1Id");
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setPubSubDomain(true);
+        factory.setSubscriptionDurable(true);
         return factory;
     }
 
