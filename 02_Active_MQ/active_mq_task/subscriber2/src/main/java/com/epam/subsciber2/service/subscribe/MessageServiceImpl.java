@@ -1,7 +1,7 @@
-package com.epam.subsciber1.service.subscribe;
+package com.epam.subsciber2.service.subscribe;
 
-import com.epam.subsciber1.model.Message;
-import com.epam.subsciber1.model.Reply;
+import com.epam.subsciber2.model.Message;
+import com.epam.subsciber2.model.Reply;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class MessageServiceImpl {
 
-    private static final String SUBSCRIBER = "Subscriber1";
+    private static final String SUBSCRIBER = "Subscriber2";
 
     @Value("${app.queue}")
     private String queue;
