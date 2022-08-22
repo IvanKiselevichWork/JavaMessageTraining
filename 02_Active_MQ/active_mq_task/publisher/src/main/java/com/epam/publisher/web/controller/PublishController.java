@@ -1,7 +1,7 @@
 package com.epam.publisher.web.controller;
 
 import com.epam.publisher.model.Message;
-import com.epam.publisher.service.publish.PublishService;
+import com.epam.publisher.service.publish.PublishServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,17 +17,24 @@ import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "api/v1/publish", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/v1", produces = APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 @Slf4j
 public class PublishController {
 
-    private PublishService publishService;
+    private PublishServiceImpl publishService;
 
-    @PostMapping
+    @PostMapping(value = "/publish")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Message> publish(@RequestBody Message message) {
         log.info("Create message: {}", message);
-        return ResponseEntity.of(Optional.of(publishService.publishMessage(message)));
+        return ResponseEntity.of(Optional.of(publishService.publishMessageToTopic(message)));
+    }
+
+    @PostMapping(value = "/publishToVirtual")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Message> publishToVirtualTopic(@RequestBody Message message) {
+        log.info("Create message: {}", message);
+        return ResponseEntity.of(Optional.of(publishService.publishMessageToVirtualTopic(message)));
     }
 }

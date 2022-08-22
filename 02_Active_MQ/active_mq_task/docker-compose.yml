@@ -31,3 +31,11 @@ services:
       ACTIVE_MQ_URL: tcp://activemq:61616
     depends_on:
       - activemq
+  virtual-consumers:
+    build:
+      context: ./virtual-consumers/.
+      dockerfile: ./Dockerfile
+    environment:
+      ACTIVE_MQ_URL: tcp://activemq:61616
+    depends_on:
+      - activemq
