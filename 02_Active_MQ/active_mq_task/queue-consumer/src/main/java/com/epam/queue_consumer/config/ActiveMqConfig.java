@@ -1,19 +1,15 @@
-package com.epam.publisher.config;
+package com.epam.queue_consumer.config;
 
-import com.epam.publisher.model.Message;
-import com.epam.publisher.model.MessageWithReplyTo;
-import com.epam.publisher.model.Reply;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.epam.queue_consumer.model.MessageWithReplyTo;
+import com.epam.queue_consumer.model.Reply;
+import com.epam.queue_consumer.model.Message;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
-import javax.jms.ConnectionFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,23 +31,5 @@ public class ActiveMqConfig {
         converter.setTypeIdPropertyName("JMS_TYPE");
 
         return converter;
-    }
-
-    @Bean
-    @Primary
-    public JmsTemplate jmsTemplate(ConnectionFactory connectionFactory) {
-        JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
-        jmsTemplate.setPubSubDomain(true);
-        jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
-        return jmsTemplate;
-    }
-
-    @Bean
-    @Qualifier("temp")
-    public JmsTemplate jmsTemplateTemp(ConnectionFactory connectionFactory) {
-        JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory);
-        jmsTemplate.setPubSubDomain(false);
-        jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
-        return jmsTemplate;
     }
 }

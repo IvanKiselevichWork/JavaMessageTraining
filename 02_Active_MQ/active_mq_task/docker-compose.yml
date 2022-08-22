@@ -39,3 +39,11 @@ services:
       ACTIVE_MQ_URL: tcp://activemq:61616
     depends_on:
       - activemq
+  queue-consumer:
+    build:
+      context: ./queue-consumer/.
+      dockerfile: ./Dockerfile
+    environment:
+      ACTIVE_MQ_URL: tcp://activemq:61616
+    depends_on:
+      - activemq

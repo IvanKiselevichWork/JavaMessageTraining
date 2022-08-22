@@ -4,10 +4,10 @@ app:
   virtual-topic: ${VIRTUAL_TOPIC:VirtualTopic.virtual_topic}
   queue-temp: ${QUEUE_TEMP:queue_temp}
 server:
-  port: 8081
+  port: 8085
 spring:
   application:
-    name: publisher
+    name: virtual-consumers
   activemq:
     broker-url: ${ACTIVE_MQ_URL:tcp://localhost:61616}
     packages:

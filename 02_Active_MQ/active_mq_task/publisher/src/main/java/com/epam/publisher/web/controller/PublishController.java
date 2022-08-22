@@ -37,4 +37,11 @@ public class PublishController {
         log.info("Create message: {}", message);
         return ResponseEntity.of(Optional.of(publishService.publishMessageToVirtualTopic(message)));
     }
+
+    @PostMapping(value = "/publishToQueue")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Message> publishToQueue(@RequestBody Message message) {
+        log.info("Create message: {}", message);
+        return ResponseEntity.of(Optional.of(publishService.publishMessageToQueue(message)));
+    }
 }
