@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message implements Serializable {
+public class MyMessage implements Serializable {
 
     private static final long serialVersionUID = 1;
 

@@ -1,6 +1,6 @@
 package com.epam.publisher.service.publish;
 
-import com.epam.publisher.model.Message;
+import com.epam.publisher.model.MyMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,12 +13,11 @@ public class PublishServiceImpl {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public Message publishMessageToTopic(Message message) {
-        rabbitTemplate.convertAndSend("rk.1", message);
-        rabbitTemplate.convertAndSend("ex", "rk.1", message);
-//        rabbitTemplate.convertAndSend("rk.2", message);
-        log.info("Message sent: {}", message);
-        return message;
+    public MyMessage publishMessageToTopic(MyMessage myMessage) {
+        rabbitTemplate.convertAndSend("ex", "rk.1", myMessage);
+        rabbitTemplate.convertAndSend("ex", "rk.2", myMessage);
+        log.info("Message sent: {}", myMessage);
+        return myMessage;
     }
 
 }

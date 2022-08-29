@@ -1,6 +1,6 @@
 package com.epam.publisher.web.controller;
 
-import com.epam.publisher.model.Message;
+import com.epam.publisher.model.MyMessage;
 import com.epam.publisher.service.publish.PublishServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +26,8 @@ public class PublishController {
 
     @PostMapping(value = "/publish")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Message> publish(@RequestBody Message message) {
-        log.info("Create message: {}", message);
-        return ResponseEntity.of(Optional.of(publishService.publishMessageToTopic(message)));
+    public ResponseEntity<MyMessage> publish(@RequestBody MyMessage myMessage) {
+        log.info("Create message: {}", myMessage);
+        return ResponseEntity.of(Optional.of(publishService.publishMessageToTopic(myMessage)));
     }
 }

@@ -1,6 +1,6 @@
 package com.epam.consumer.service.listen;
 
-import com.epam.consumer.model.Message;
+import com.epam.consumer.model.MyMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,8 +26,8 @@ public class ListenServiceImpl {
                     exchange = @Exchange(name = "ex", type = ExchangeTypes.TOPIC)
             )
     )
-    public void listen1(Message message) {
-        log.info("Get message to consumer 1: {}", message);
+    public void listen1(Message<MyMessage> message) {
+        log.info("Get message to consumer 1: headers: {}, payload: {}", message.getHeaders(), message.getPayload());
     }
 
     @RabbitListener(
@@ -36,8 +37,8 @@ public class ListenServiceImpl {
                     exchange = @Exchange(name = "ex", type = ExchangeTypes.TOPIC)
             )
     )
-    public void listen2(Message message) {
-        log.info("Get message to consumer 2: {}", message);
+    public void listen2(Message<MyMessage> message) {
+        log.info("Get message to consumer 2: headers: {}, payload: {}", message.getHeaders(), message.getPayload());
     }
 
 }
